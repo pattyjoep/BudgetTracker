@@ -43,16 +43,38 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="db.js"></script>
   <script src="assets/js/index.js"></script>
   <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js")
-          .then(reg => {
-            console.log("We found your service worker file!", reg);
-          });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          // Registration failed
+          console.log('ServiceWorker registration failed: ', err);
+        }).catch(function(err) {
+          console.log(err)
+        });
       });
+    } else {
+      console.log('service worker is not supported');
     }
   </script>
+  <!-- <script>
+    const request = window.indexedDB.open("BudgetOfflineDB", 1);
+
+    request.onupgradeneeded = ({ target }) => {
+        const db = target.result;
+        const objectStore = db.createObjectStore("BudgetOfflineDB");
+        objectStore.createIndex("transaction", "transaction");
+        objectStore.createIndex("amount", "amount");
+      };
+
+    request.onsuccess = event => {
+      console.log(request.result.name);
+    }; 
+  </script> -->
 </body>
 </html>
