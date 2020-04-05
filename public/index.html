@@ -62,19 +62,5 @@
       console.log('service worker is not supported');
     }
   </script>
-  <!-- <script>
-    const request = window.indexedDB.open("BudgetOfflineDB", 1);
-
-    request.onupgradeneeded = ({ target }) => {
-        const db = target.result;
-        const objectStore = db.createObjectStore("BudgetOfflineDB");
-        objectStore.createIndex("transaction", "transaction");
-        objectStore.createIndex("amount", "amount");
-      };
-
-    request.onsuccess = event => {
-      console.log(request.result.name);
-    }; 
-  </script> -->
 </body>
 </html>
